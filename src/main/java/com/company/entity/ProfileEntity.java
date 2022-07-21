@@ -1,32 +1,40 @@
 package com.company.entity;
 
-import com.company.enums.CompanyType;
+import com.company.enums.GeneralRole;
+import com.company.enums.GeneralStatus;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "company")
-public class CompanyEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+@Table(name = "profile")
+public class ProfileEntity extends BaseEntity {
+//   Profile - bular uzcard ni odamlari.
+//     id(uuid),name,surname,created_date,status,role(ADMIN,MODERATOR), username,password
+
+    @Column(nullable = false)
+    private String name;
 
     @Column
-    private String name;
+    private String surname;
+
+    @Column(unique = true)
+    private String username;
+
     @Column
-    private String address;
-    @Column
-    private String contact;
-    @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
-    @Column
-    private Boolean visible;
+    private String password;
+
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private GeneralRole role;
+
     @Column
     @Enumerated(EnumType.STRING)
-    private CompanyType type;
+    private GeneralStatus status;
+
+
+
 }

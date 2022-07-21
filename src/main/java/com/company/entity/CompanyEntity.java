@@ -1,6 +1,7 @@
-ackage com.company.entity;
+package com.company.entity;
 
-import com.company.enums.CompanyType;
+import com.company.enums.GeneralRole;
+import com.company.enums.GeneralStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,22 +12,31 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "company")
-public class CompanyEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class CompanyEntity extends BaseEntity {
+    //    id(uuid), name, address,contact,created_date,visible, role(BANK,PAYMENT), username (unique),password
 
     @Column
     private String name;
     @Column
     private String address;
+
+    @Column(unique = true)
+    private String username;
+
+    @Column
+    private String password;
+
     @Column
     private String contact;
-    @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
-    @Column
-    private Boolean visible;
+
     @Column
     @Enumerated(EnumType.STRING)
-    private CompanyType type;
+    private GeneralStatus status;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private GeneralRole role;
+
+    @Column() // nullable = false
+    private Double servicePercentage;
 }

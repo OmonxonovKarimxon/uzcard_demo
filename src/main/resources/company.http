@@ -1,0 +1,34 @@
+POST localhost:8080/company/adm/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg0MjMyMDIsImV4cCI6MTY1ODQyNjgwMiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEiLCJyb2xlIjoiUk9MRV9BRE1JTiIsInBhc3N3b3JkIjoiYjRiMTQ3YmM1MjI4Mjg3MzFmMWEwMTZiZmE3MmMwNzMiLCJ1c2VybmFtZSI6ImthcmlteG9uIiwic3RhdHVzIjoiQUNUSVZFIn0.I5vfkerJzgScSlV2qFeFVQ6jvofzfLIosl3A61vg0-c
+
+{
+  "name": "UzCard",
+  "address": "chilanzar",
+  "contact": "0987654321",
+  "role": "ROLE_UZCARD",
+  "status": "ACTIVE",
+  "username": "UzCard",
+  "password": "00"
+}
+
+###
+PUT localhost:8080/company/adm/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTQzNjgsImV4cCI6MTY1ODI1Nzk2OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.66s5WN4izTSaSjqdsGijjkQ-LF0bDuixR-Xb4z4UOCw
+
+{
+  "id": "402881838217a49d018217ad0b3f0001",
+  "name": "ANORBANK",
+  "address": "chilonzor",
+  "contact": "1234567890",
+  "role": "ROLE_BANK",
+  "status": "ACTIVE",
+  "username": "anor_bank",
+  "password": "00"
+}
+###
+GET localhost:8080/company/adm/pagination
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTQzNjgsImV4cCI6MTY1ODI1Nzk2OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.66s5WN4izTSaSjqdsGijjkQ-LF0bDuixR-Xb4z4UOCw
+
+

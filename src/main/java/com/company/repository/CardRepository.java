@@ -30,4 +30,6 @@ public interface CardRepository extends JpaRepository<CardEntity, String> {
 
     Optional<CardEntity> findByNumber(String number);
 
+
+
 }

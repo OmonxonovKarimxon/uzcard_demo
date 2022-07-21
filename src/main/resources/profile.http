@@ -1,0 +1,29 @@
+POST localhost:8080/profile/adm/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTczMzgsImV4cCI6MTY1ODI2MDkzOCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.mN24rEMkP90zJeF31jlapGZqY7TN6gVf8zAMvkTBsgg
+
+{
+  "name": "karimxon",
+  "surname": "omonxonov",
+  "role": "ROLE_USER",
+  "status": "ACTIVE",
+  "username": "uz_card_shoh1",
+  "password": "00"
+}
+
+###
+PUT localhost:8080/profile/adm/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTQzNjgsImV4cCI6MTY1ODI1Nzk2OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.66s5WN4izTSaSjqdsGijjkQ-LF0bDuixR-Xb4z4UOCw
+
+{
+  "id": "4028818382171710018217178fac0000",
+  "name": "jahon",
+  "surname": "holmurodov",
+  "password": "00"
+}
+
+###
+GET localhost:8080/profile/adm/pagination
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTQzNjgsImV4cCI6MTY1ODI1Nzk2OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.66s5WN4izTSaSjqdsGijjkQ-LF0bDuixR-Xb4z4UOCw
+

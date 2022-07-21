@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationCompanyDTO {
-//   id(uuid), name, address,contact,created_date,visible, 
-//   role(BANK,PAYMENT), username (unique),password
+public class ResponseCompanyDTO {
 
+
+    private String id;
     private String name;
     private String address;
     private String contact;

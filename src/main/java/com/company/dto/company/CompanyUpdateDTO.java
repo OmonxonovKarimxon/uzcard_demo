@@ -7,16 +7,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationCompanyDTO {
+public class CompanyUpdateDTO {
 //   id(uuid), name, address,contact,created_date,visible, 
 //   role(BANK,PAYMENT), username (unique),password
 
+    private String id;
     private String name;
     private String address;
     private String contact;
-    private GeneralRole role;
-    private GeneralStatus status;
-    private String username;
     private String password;
 
 

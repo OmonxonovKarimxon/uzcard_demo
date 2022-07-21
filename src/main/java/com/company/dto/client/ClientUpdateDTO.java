@@ -6,13 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClientRegisterDTO {
-
-    private GeneralStatus status;
-    private String passportNumber;
-    private String passportSeria;
-    private String phone;
+public class ClientUpdateDTO {
+    private String id;
     private String name;
-    private String middleName;
     private String surname;
 }

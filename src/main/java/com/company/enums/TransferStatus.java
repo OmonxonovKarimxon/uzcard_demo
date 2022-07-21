@@ -1,6 +1,6 @@
 package com.company.enums;
 
-public enum CardStatus {
+public enum TransferStatus {
 
-    ACTIVE, BLOCK, NO_ACTIVE
+    SUCCESS,FAILED,CANCELED, IN_PROGRESS
 }

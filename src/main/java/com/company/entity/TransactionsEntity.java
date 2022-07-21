@@ -1,48 +1,44 @@
 package com.company.entity;
 
-import com.company.enums.CardStatus;
-import com.company.enums.CompanyType;
+import com.company.enums.TransactionStatus;
+import com.company.enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "transfer")
-public class TransferEntity extends BaseEntity {
-// id (uuid), from_card_id, to_card_id, total_amount(5600),amount(5500),service_amount(100),
-// service_percentage(1%),created_date, status(SUCCESS,FAILED,CANCELED), company_id
+@Table(name = "Transactions")
+public class TransactionsEntity extends BaseEntity {
+//  id(uuid), card_id,amount,transaction_type (CREDIT,DEBIT), transfer_id, created_date,
+//        status(CREATED,SUCCESS,FAILED,CANCELED,)
 
-    @Column(name = "from_card_id")
-    private String fromCardId;
+    @Column(name = "card_id")
+    private String cardId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_card_id", nullable = false, updatable = false, insertable = false)
-    private CardEntity fromCard;
+    @JoinColumn(name = "card_id", nullable = false, updatable = false, insertable = false)
+    private CardEntity card;
 
-    @Column(name = "to_card_id")
-    private String toCardId;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "to_card_id", nullable = false, updatable = false, insertable = false)
-    private CardEntity toCard;
 
     @Column
-    private LocalDateTime expired_date;
-
-    @Column
-    private String phone;
+    private long amount;
 
     @Column
     @Enumerated(EnumType.STRING)
-    private CardStatus status;
+    private TransactionType type;
+
     @Column
     private Long balance;
 
-    @Column(name = "profile_id")
-    private String profileId;
+    @Column(name = "transfer_id")
+    private String transferId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", nullable = false, updatable = false, insertable = false)
-    private ProfileEntity profile;
+    @JoinColumn(name = "transfer_id", nullable = false, updatable = false, insertable = false)
+    private TransferEntity transfer;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus status;
 }

@@ -1,15 +1,13 @@
 package com.company.config;
 
-import com.company.entity.ProfileEntity;
-import com.company.exps.BadRequestException;
+import com.company.dto.JwtDTO;
+import com.company.repository.CompanyRepository;
 import com.company.repository.ProfileRepository;
-import com.company.service.ProfileService;
 import com.company.util.JwtUtil;
 import io.jsonwebtoken.JwtException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,8 +22,16 @@ import java.io.IOException;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
 
-    @Autowired
-    private ProfileRepository profileRepository;
+    private final ProfileRepository profileRepository;
+    private final CompanyRepository companyRepository;
+    private final CustomUserDetailService customUserDetailService;
+
+    public JwtTokenFilter(ProfileRepository profileRepository, CompanyRepository companyRepository, UserDetailsService userDetailsService, CustomUserDetailService customUserDetailService) {
+        this.profileRepository = profileRepository;
+        this.companyRepository = companyRepository;
+
+        this.customUserDetailService = customUserDetailService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -40,12 +46,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         try {
             final String token = header.split(" ")[1].trim();
-            Integer id = JwtUtil.decode(token);
-            ProfileEntity profile =  get(id);
+            JwtDTO dto = JwtUtil.decode(token);
+            CustomUserDetails userDetails = new CustomUserDetails(dto);
 
-
-//            UserDetails userDetails = userDetailsService.loadUserByUsername(profile.getEmail());
-            UserDetails userDetails = new CustomUserDetails(profile);
 
             UsernamePasswordAuthenticationToken
                     authentication = new UsernamePasswordAuthenticationToken(userDetails,
@@ -63,10 +66,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 
     }
-    public ProfileEntity get(Integer id) {
-        return profileRepository.findById(id).orElseThrow(() -> {
-            throw new BadRequestException("user not found");
-        });
-    }
+
+
 }
 

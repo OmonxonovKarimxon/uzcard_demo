@@ -1,5 +1,6 @@
 package com.company.controller;
 
+import com.company.dto.card.CardCreateDTO;
 import com.company.dto.card.CardDTO;
 import com.company.dto.card.CardPhoneDTO;
 import com.company.dto.card.CardStatusDTO;
@@ -18,7 +19,7 @@ public class CardController {
     private CardService cardService;
 
     @PostMapping("/bank/create")
-    public ResponseEntity<CardDTO> create(@RequestBody CardDTO dto){
+    public ResponseEntity<CardDTO> create(@RequestBody CardCreateDTO dto){
         CardDTO response = cardService.create(dto);
         return ResponseEntity.ok().body(response);
     }
@@ -29,37 +30,37 @@ public class CardController {
         return ResponseEntity.ok("Successfully");
     }
 
-    @PutMapping("/company/change_status")
+    @PutMapping("/all/change_status")
     public ResponseEntity<String> changeStatus(@RequestBody @Valid CardStatusDTO dto){
         String response = cardService.changeStatus(dto);
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/company/get_card/{id}")
+    @GetMapping("/all/get_card/{id}")
     public ResponseEntity<CardDTO> getCardById(@PathVariable("id") String id){
         CardDTO dto = cardService.getCardById(id);
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/company/get_cardList/{phone}")
+    @GetMapping("/all/get_cardList/{phone}")
     public ResponseEntity<List<CardDTO>> getCardListByPhone(@PathVariable("phone") String phone){
         List<CardDTO> dtoList = cardService.getCardListByPhone(phone);
         return ResponseEntity.ok().body(dtoList);
     }
 
-    @GetMapping("/company/get_cardList/{clientId}")
+    @GetMapping("/all/get_cardList/{clientId}")
     public ResponseEntity<List<CardDTO>> getCardListByClientId(@PathVariable("clientId") String clientId){
         List<CardDTO> dtoList = cardService.getCardListByClientId(clientId);
         return ResponseEntity.ok().body(dtoList);
     }
 
-    @GetMapping("/company/get_card_by_num/{num}")
+    @GetMapping("/all/get_card_by_num/{num}")
     public ResponseEntity<CardDTO> getCardByNumber(@PathVariable("num") String num){
         CardDTO dto = cardService.getCardByNumber(num);
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/company/get_card_balance_byNum/{num}")
+    @GetMapping("/all/get_card_balance_byNum/{num}")
     public ResponseEntity<CardDTO> getCardListByNumber(@PathVariable("num") String num){
         CardDTO dto = cardService.getCardBalanceByNumber(num);
         return ResponseEntity.ok().body(dto);

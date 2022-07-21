@@ -1,80 +1,80 @@
 package com.company.service;
 
-import com.company.dto.company.CompanyUpdateDTO;
-import com.company.dto.company.ResponseCompanyDTO;
-import com.company.dto.profile.ProfileUpdateDTO;
-import com.company.dto.profile.RegistretionProfileDTO;
-import com.company.dto.profile.ResponseProfileDTO;
-import com.company.entity.CompanyEntity;
-import com.company.entity.ProfileEntity;
-import com.company.exps.ItemNotFoundEseption;
-import com.company.repository.ProfileRepository;
-import com.company.util.MD5Util;
-import org.springframework.data.domain.Page;
+import com.company.dto.client.ClientRegisterDTO;
+import com.company.dto.client.ClientResponseDTO;
+import com.company.dto.client.ClientUpdateDTO;
+import com.company.entity.ClientEntity;
+import com.company.exps.ItemNotFoundException;
+import com.company.repository.ClientFilterRepository;
+import com.company.repository.ClientRepository;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProfileService {
+public class ClientService {
+    private final ClientRepository clientRepository;
+    private final ClientFilterRepository clientFilterRepository;
 
-    private final ProfileRepository profileRepository;
-
-    public ProfileService(ProfileRepository profileRepository) {
-        this.profileRepository = profileRepository;
+    public ClientService(ClientRepository clientRepository, ClientFilterRepository clientFilterRepository) {
+        this.clientRepository = clientRepository;
+        this.clientFilterRepository = clientFilterRepository;
     }
 
-    public String create(RegistretionProfileDTO dto) {
 
-        ProfileEntity entity = new ProfileEntity();
-        entity.setUsername(dto.getUsername());
-        entity.setPassword(MD5Util.getMd5(dto.getPassword()));
+    public String create(ClientRegisterDTO dto) {
+
+        ClientEntity entity = new ClientEntity();
         entity.setName(dto.getName());
-        entity.setRole(dto.getRole());
-        entity.setStatus(dto.getStatus());
         entity.setSurname(dto.getSurname());
-        profileRepository.save(entity);
-
+        entity.setMiddleName(dto.getMiddleName());
+        entity.setPassportNumber(dto.getPassportNumber());
+        entity.setPassportSeria(dto.getPassportSeria());
+        entity.setStatus(dto.getStatus());
+        entity.setPhone(dto.getPhone());
+        clientRepository.save(entity);
         return "successfully";
 
     }
-    public String update(ProfileUpdateDTO dto) {
-        Optional<ProfileEntity> byId = profileRepository.findById(dto.getId());
-        if(byId.isEmpty()){
-            throw  new ItemNotFoundEseption("itam not fount exception");
+
+    public String update(ClientUpdateDTO dto) {
+        Optional<ClientEntity> byId = clientRepository.findById(dto.getId());
+        if (byId.isEmpty()) {
+            throw new ItemNotFoundException("itam not fount exception");
         }
-      String password=  MD5Util.getMd5(dto.getPassword());
-        profileRepository.update(password,dto.getName(),dto.getSurname(), dto.getId());
+
+        clientRepository.update(dto.getName(), dto.getSurname(), dto.getId());
         return "successfully";
     }
 
-    public PageImpl<ResponseCompanyDTO> pagination(int page, int size) {
+    public PageImpl<ClientResponseDTO> pagination(int page, int size, ClientResponseDTO dto) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<ProfileEntity> videoShortInfoPage = profileRepository.pagination(pageable);
-        List<ResponseProfileDTO> dtoList = new LinkedList<>();
-        videoShortInfoPage.getContent().forEach(entity -> {
-            dtoList.add(entityToDTO(entity));
+        List<ClientEntity> filter = clientFilterRepository.filter(dto, pageable);
+        List<ClientResponseDTO> dtoList = new ArrayList<>();
+        filter.forEach(clientEntity -> {
+            dtoList.add(entityToDTO(clientEntity));
         });
-        return new PageImpl(dtoList, pageable, videoShortInfoPage.getTotalElements());
+        return new PageImpl(dtoList, pageable, filter.size());
     }
 
 
 
-    private ResponseProfileDTO entityToDTO(ProfileEntity entity){
-        ResponseProfileDTO dto = new ResponseProfileDTO();
+
+    private ClientResponseDTO entityToDTO(ClientEntity entity) {
+        ClientResponseDTO dto = new ClientResponseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setSurname(entity.getSurname());
-        dto.setPassword(entity.getPassword());
-        dto.setRole(entity.getRole());
+        dto.setMiddleName(entity.getMiddleName());
+        dto.setPhone(entity.getPhone());
         dto.setStatus(entity.getStatus());
-        dto.setUsername(entity.getUsername());
-
+        dto.setPassportNumber(entity.getPassportNumber());
+        dto.setPassportSeria(entity.getPassportSeria());
         return dto;
     }
 }

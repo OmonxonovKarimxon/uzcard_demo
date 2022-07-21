@@ -1,7 +1,7 @@
 package com.company.exps;
 
-public class ItemNotFoundEseption extends RuntimeException{
-    public ItemNotFoundEseption(String massage) {
+public class ItemNotFoundException extends RuntimeException{
+    public ItemNotFoundException(String massage) {
         super(massage);
     }
 }

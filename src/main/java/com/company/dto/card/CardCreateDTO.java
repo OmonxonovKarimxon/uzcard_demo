@@ -12,16 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CardDTO {
-    private String id;
-    private String number;
-    private LocalDateTime createdDate;
-    private LocalDateTime expiredDate;
-    private String phone;
-    private Long balance;
+public class CardCreateDTO {
     private String clientId;
-    private ClientResponseDTO client;
-    private String companyId;
-    private ResponseCompanyDTO company;
-    private GeneralStatus status;
 }

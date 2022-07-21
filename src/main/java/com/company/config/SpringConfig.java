@@ -45,29 +45,18 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
         // Authorization
         http.authorizeRequests()
                  .antMatchers(AUTH_WHITELIST).permitAll()
-//                .antMatchers("/profile/public/**").permitAll()
-                .antMatchers("/attach/**").permitAll()
-                .antMatchers("/profile/public/*").permitAll()
                 .antMatchers("/auth/public/**").permitAll()
 
 
-               .antMatchers(  "/profile/adm/*","/comment/adm/**").hasRole("ADMIN")
-               .antMatchers(  "/playlist/adm/**").hasRole("ADMIN")
-               .antMatchers(  "/channel/user/*").hasRole("USER")
-               .antMatchers(  "/comment/user/**").hasRole("USER")
-               .antMatchers(  "/video/user/**").hasRole("USER")
-               .antMatchers(  "/video/adm/**").hasRole("ADMIN")
-               .antMatchers(  "/playlist/user/**","/playlist/byId/*").hasRole("USER")
-               .antMatchers(  "/channel/adminAndUser/**","/playlist/userandAdmin/**").hasAnyRole("USER","ADMIN")
-               .antMatchers(  "/channel/pagination/").hasRole("ADMIN")
-               .antMatchers(  "/profile/user/*").hasRole("USER")
-               .antMatchers(  "/video_like/**","/comment_like/**").hasRole("USER")
-               .antMatchers(  "/category/adm/**").hasRole("ADMIN")
-               .antMatchers(  "/subscription/user/**").hasRole("USER")
-               .antMatchers(  "/subscription/adm/*").hasRole("ADMIN")
-                .antMatchers(  "/report/user/**").hasRole("USER")
-                .antMatchers(  "/report/adm/**").hasRole("ADMIN")
 
+
+               .antMatchers(  "/company/adm/**").hasRole("ADMIN")
+               .antMatchers(  "/profile/adm/**").hasRole("ADMIN")
+               .antMatchers(  "/client/bank/**").hasRole("BANK")
+               .antMatchers(  "/client/adm/**").hasRole("ADMIN")
+               .antMatchers(  "/card/bank/**").hasRole("BANK")
+               .antMatchers(  "/card/all/**","/transfer/all/***").hasAnyRole("BANK","PAYMENT")
+               .antMatchers(  "/transfer/user/**").hasAnyRole("USER")
 
                 .anyRequest().authenticated()
                 .and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

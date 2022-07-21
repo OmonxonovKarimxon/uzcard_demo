@@ -1,6 +1,6 @@
 package com.company.enums;
 
-public enum ProfileStatus {
+public enum GeneralStatus {
 
     ACTIVE, BLOCK, NO_ACTIVE
 }

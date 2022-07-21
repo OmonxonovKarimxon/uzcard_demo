@@ -1,5 +1,6 @@
 package com.company.enums;
 
-public enum TransactionType {
-    CREDIT,DEBIT
+public enum TransactionStatus {
+
+    SUCCESS,FAILED,CANCELED,CREATED
 }

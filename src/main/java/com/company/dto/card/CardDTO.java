@@ -1,7 +1,7 @@
 package com.company.dto.card;
 
-import com.company.dto.client.ClientDTO;
-import com.company.dto.CompanyDTO;
+import com.company.dto.client.ClientResponseDTO;
+import com.company.dto.company.ResponseCompanyDTO;
 import com.company.enums.GeneralStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -20,8 +20,8 @@ public class CardDTO {
     private String phone;
     private Long balance;
     private String clientId;
-    private ClientDTO client;
+    private ClientResponseDTO client;
     private String companyId;
-    private CompanyDTO company;
+    private ResponseCompanyDTO company;
     private GeneralStatus status;
 }

@@ -1,10 +1,15 @@
-POST localhost:8080/card/bank/create
+POST localhost:8080/transfer/all/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg0MDk5NDgsImV4cCI6MTY1ODQxMzU0OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyODgxODM4MjFhNzYzNDAxODIxYTc3M2M3OTAwMDAiLCJyb2xlIjoiUk9MRV9CQU5LIiwicGFzc3dvcmQiOiJiNGIxNDdiYzUyMjgyODczMWYxYTAxNmJmYTcyYzA3MyIsInVzZXJuYW1lIjoiQU5PUkJBTksiLCJzdGF0dXMiOiJBQ1RJVkUifQ.N1263_asDuRKowp9P2dJPBCR8bMKChoE31Wpsc1F4A8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg0MjE5MjIsImV4cCI6MTY1ODQyNTUyMiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyODgxODM4MjFhNzYzNDAxODIxYTc3M2M3OTAwMDAiLCJyb2xlIjoiUk9MRV9CQU5LIiwicGFzc3dvcmQiOiJiNGIxNDdiYzUyMjgyODczMWYxYTAxNmJmYTcyYzA3MyIsInVzZXJuYW1lIjoiQU5PUkJBTksiLCJzdGF0dXMiOiJBQ1RJVkUifQ.5b1bTSogGs4XbnvvbYGsKjCTVstR76IAeBo3vUOamuM
 
 {
-  "clientId" : "40288183821a955501821a955cf30000"
+
+  "fromCard" : "8600550510021455",
+  "toCard" : "8600267403345780",
+  "amount" : 15000,
+  "companyId" : "40288183821a763401821a773c790000"
 }
+
 
 ###
 PUT localhost:8080/profile/adm/update

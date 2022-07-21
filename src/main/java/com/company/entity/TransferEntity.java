@@ -1,6 +1,7 @@
 package com.company.entity;
 
-import com.company.enums.CompanyType;
+import com.company.enums.CardStatus;
+import com.company.enums.TransferStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,25 +11,44 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "card")
-public class CardEntity extends  BaseEntity {
-// id(uuid),number,expired_date,phone,status(ACTIVE,BLOCK,NO_ACTIVE),created_date,balance, profile_id,
-    @Column
-    private String number;
-    @Column
-    private LocalDateTime expired_date;
-    @Column
-    private String phone;
+@Table(name = "transfer")
+public class TransferEntity extends BaseEntity {
+// id (uuid), from_card_id, to_card_id, total_amount(5600),amount(5500),service_amount(100),
+//     service_percentage(1%),created_date, status(SUCCESS,FAILED,CANCELED), company_id
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private CompanyType type;
-    @Column
-    private Long balans;
-
-    @Column(name = "profile_id")
-    private Integer profileId;
+    @Column(name = "from_card_id")
+    private String fromCardId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", nullable = false,updatable = false,insertable = false)
-    private ProfileEntity profile;
+    @JoinColumn(name = "from_card_id", nullable = false, updatable = false, insertable = false)
+    private CardEntity fromCard;
+
+    @Column(name = "to_card_id")
+    private String toCardId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "to_card_id", nullable = false, updatable = false, insertable = false)
+    private CardEntity toCard;
+
+    @Column(name = "total_amount")
+    private Long totalAmount;
+
+    @Column()
+    private Long amount;
+
+    @Column(name = "service_amount")
+    private Long  serviceAmount;
+
+    @Column()
+    private LocalDateTime expired_date;
+
+
+    @Column()
+    @Enumerated(EnumType.STRING)
+    private TransferStatus status;
+
+
+    @Column(name = "company_Id")
+    private String companyId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_Id", nullable = false, updatable = false, insertable = false)
+    private CompanyEntity company;
 }

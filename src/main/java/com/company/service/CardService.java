@@ -1,15 +1,17 @@
 package com.company.service;
 
-import com.company.dto.client.ClientDTO;
+import com.company.dto.card.CardCreateDTO;
 import com.company.dto.card.CardDTO;
 import com.company.dto.card.CardPhoneDTO;
 import com.company.dto.card.CardStatusDTO;
+import com.company.dto.client.ClientResponseDTO;
 import com.company.entity.CardEntity;
 import com.company.enums.GeneralRole;
 import com.company.enums.GeneralStatus;
-import com.company.exp.ItemNotFoundException;
+import com.company.exps.ItemNotFoundException;
 import com.company.repository.CardRepository;
-import com.company.util.CardNumberGenerator;
+import com.company.util.CreditCardNumberGenerator;
+import com.company.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +26,27 @@ public class CardService {
     @Autowired
     private CardRepository cardRepository;
     @Autowired
-    private CardNumberGenerator cardNumberGenerator;
-    @Autowired
-    private AuthService authService;
+    private CreditCardNumberGenerator cardNumberGenerator;
 
 
-    public CardDTO create(CardDTO dto) {
+    public CardDTO create(CardCreateDTO dto) {
         CardEntity entity = new CardEntity();
-        entity.setBalance(dto.getBalance());
+        entity.setBalance((long) 5000);
         entity.setClientId(dto.getClientId());
         entity.setExpiredDate(LocalDateTime.now().plusYears(4));
         entity.setNumber(cardNumberGenerator.generate("8600", 16));
-        entity.setCompanyId(authService.getCurrentUser().getId());
-        entity.setStatus(GeneralStatus.NOT_ACTIVE);
+        entity.setHiddenNumber("8600-****-****-"+entity.getNumber().substring(entity.getNumber().length()-4));
+        entity.setCompanyId(SpringUtil.currentUser().getId());
+        entity.setStatus(GeneralStatus.ACTIVE);
         cardRepository.save(entity);
 
-        dto.setId(entity.getId());
-        dto.setNumber(entity.getNumber());
-        dto.setCreatedDate(entity.getCreatedDate());
-        dto.setExpiredDate(entity.getExpiredDate());
-        dto.setStatus(entity.getStatus());
-        return dto;
+        CardDTO cardDTO = new CardDTO();
+        cardDTO.setId(entity.getId());
+        cardDTO.setNumber(entity.getNumber());
+        cardDTO.setCreatedDate(entity.getCreatedDate());
+        cardDTO.setExpiredDate(entity.getExpiredDate());
+        cardDTO.setStatus(entity.getStatus());
+        return cardDTO;
     }
 
     public void assignPhone(CardPhoneDTO dto) {
@@ -57,10 +59,15 @@ public class CardService {
             throw new ItemNotFoundException("Card not found!");
         });
     }
+    public CardEntity getByCardNumber(String cardNumber) {
+        return cardRepository.findByNumber(cardNumber).orElseThrow(() -> {
+            throw new ItemNotFoundException("Card not found!");
+        });
+    }
 
     public String changeStatus(CardStatusDTO dto) {
         get(dto.getId());
-        GeneralRole role = authService.getCurrentUser().getRole();
+        GeneralRole role = SpringUtil.currentUser().getRole();
         if (role.equals(GeneralRole.ROLE_PAYMENT)) {
             cardRepository.changeStatus(GeneralStatus.BLOCK, dto.getId());
             return "Card blocked";
@@ -78,7 +85,7 @@ public class CardService {
     public List<CardDTO> getCardListByPhone(String phone) {
         List<CardEntity> entityList = cardRepository.findByPhone(phone);
         List<CardDTO> list = new LinkedList<>();
-        GeneralRole role = authService.getCurrentUser().getRole();
+        GeneralRole role = SpringUtil.currentUser().getRole();
         entityList.forEach(entity -> {
             if (role.equals(GeneralRole.ROLE_PAYMENT)) {
                 list.add(getDTO(entity));
@@ -94,7 +101,7 @@ public class CardService {
 
 
     private CardDTO checkCompanyRole(String cId, CardEntity entity) {
-        String companyId = authService.getCurrentUser().getId();
+        String companyId = SpringUtil.currentUser().getId();
         if (Objects.equals(cId, companyId)) {
             return getDTO(entity);
         }
@@ -112,7 +119,7 @@ public class CardService {
         dto.setExpiredDate(entity.getExpiredDate());
         dto.setStatus(entity.getStatus());
 
-        ClientDTO client = new ClientDTO();
+        ClientResponseDTO client = new ClientResponseDTO();
         client.setId(entity.getClientId());
         client.setName(entity.getClient().getName());
         client.setSurname(entity.getClient().getSurname());
@@ -121,13 +128,13 @@ public class CardService {
     }
 
     public List<CardDTO> getCardListByClientId(String clientId) {
-        GeneralRole role = authService.getCurrentUser().getRole();
+        GeneralRole role = SpringUtil.currentUser().getRole();
         List<CardDTO> list = new LinkedList<>();
         List<CardEntity> entityList;
         if (role.equals(GeneralRole.ROLE_PAYMENT)) {
             entityList = cardRepository.findByClientId(clientId);
         } else {
-            String cId = authService.getCurrentUser().getId();
+            String cId = SpringUtil.currentUser().getId();
             entityList = cardRepository.findByClientIdAndCompanyId(clientId, cId);
         }
         entityList.forEach(entity -> {
@@ -147,8 +154,8 @@ public class CardService {
     }
 
     private void roleCheck(String cId) {
-        GeneralRole role = authService.getCurrentUser().getRole();
-        String companyId = authService.getCurrentUser().getId();
+        GeneralRole role = SpringUtil.currentUser().getRole();
+        String companyId = SpringUtil.currentUser().getId();
 
         if (role.equals(GeneralRole.ROLE_BANK)) {
             if (!Objects.equals(cId, companyId)) {
@@ -159,7 +166,7 @@ public class CardService {
 
     public CardDTO getCardBalanceByNumber(String num) {
         Optional<CardEntity> optional = cardRepository.findByNumber(num);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new ItemNotFoundException("Card not found!");
         }
         CardEntity entity = optional.get();

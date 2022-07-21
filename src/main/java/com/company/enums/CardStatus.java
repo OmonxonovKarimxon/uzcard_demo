@@ -1,6 +1,6 @@
 package com.company.enums;
 
-public enum CompanyType {
+public enum CardStatus {
 
-    PAYMENT, BANK
+    ACTIVE, BLOCK, NO_ACTIVE
 }

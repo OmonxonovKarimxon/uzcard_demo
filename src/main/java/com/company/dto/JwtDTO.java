@@ -1,5 +1,7 @@
 package com.company.dto;
 
+import com.company.enums.GeneralRole;
+import com.company.enums.GeneralStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,10 @@ import lombok.Setter;
 public class JwtDTO {
     private String id;
     private String role;
-    // role, dasdas
+    private String username;
+    private String password;
+    private String status;
+    private Boolean visible;
+
 
 }

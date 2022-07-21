@@ -1,9 +1,10 @@
 package com.company.controller;
 
-import com.company.dto.company.ResponseCompanyDTO;
-import com.company.dto.profile.ProfileUpdateDTO;
-import com.company.dto.profile.RegistretionProfileDTO;
-import com.company.service.ProfileService;
+import com.company.dto.client.ClientRegisterDTO;
+import com.company.dto.client.ClientResponseDTO;
+import com.company.dto.client.ClientUpdateDTO;
+import com.company.service.ClientService;
+import lombok.Getter;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,31 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/client")
 public class ClientController {
-    private final ProfileService profileService;
+    private final ClientService clientService;
 
-    public ClientController(ProfileService profileService) {
-        this.profileService = profileService;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
 
-    @PostMapping("/adm/create")
-    public ResponseEntity<?> create(@RequestBody @Valid RegistretionProfileDTO dto){
-       String response = profileService.create(dto);
+    @PostMapping("/bank/create")
+    public ResponseEntity<?> create(@RequestBody @Valid ClientRegisterDTO dto){
+       String response = clientService.create(dto);
         return ResponseEntity.ok().body(response);
     }
-    @PutMapping("/adm/update")
-    public ResponseEntity<?> update(@RequestBody ProfileUpdateDTO dto){
-        String response = profileService.update(dto);
+    @PutMapping("/bank/update")
+    public ResponseEntity<?> update(@RequestBody ClientUpdateDTO dto){
+        String response = clientService.update(dto);
         return ResponseEntity.ok().body(response);
     }
-    @GetMapping("/adm/pagination")
-    public ResponseEntity<?> getShortInfoByCategoryKey(@RequestParam(value = "page", defaultValue = "0") int page,
+
+        @GetMapping("/adm/pagination")
+    public ResponseEntity<?> getShortInfoByCategoryKey(@RequestBody ClientResponseDTO dto,
+                                                       @RequestParam(value = "page", defaultValue = "0") int page,
                                                        @RequestParam(value = "size", defaultValue = "5") int size) {
 
-        PageImpl<ResponseCompanyDTO> list = profileService.pagination(page, size);
+        PageImpl<ClientResponseDTO> list = clientService.pagination(page, size, dto);
         return ResponseEntity.ok().body(list);
     }
+
 
 }

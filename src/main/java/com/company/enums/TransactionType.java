@@ -1,6 +1,5 @@
 package com.company.enums;
 
-public enum ProfileStatus {
-
-    ACTIVE, BLOCK, NO_ACTIVE
+public enum TransactionType {
+    CREDIT,DEBIT
 }

@@ -1,7 +1,9 @@
-package com.company.utils;
+package com.company.util;
+
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
-
+@Service
 public class CreditCardNumberGenerator {
 
 
