@@ -1,0 +1,34 @@
+POST localhost:8080/client/bank/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgzNzk5NjYsImV4cCI6MTY1ODM4MzU2NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyODgxODM4MjFhNzYzNDAxODIxYTc3M2M3OTAwMDAifQ.bIrwaXKCTtPL81BX0R3yw_ndMPoltlboU_hDI1EcgEI
+
+{
+  "name": "karimxon",
+  "surname": "omonxonov",
+  "middleName": "Saidkarim",
+  "status": "ACTIVE",
+  "passportNumber": "AA",
+  "passportSeria": "12344611",
+  "phone": "123456789"
+}
+
+###
+PUT localhost:8080/profile/adm/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTQzNjgsImV4cCI6MTY1ODI1Nzk2OCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.66s5WN4izTSaSjqdsGijjkQ-LF0bDuixR-Xb4z4UOCw
+
+{
+  "id": "4028818382171710018217178fac0000",
+  "name": "jahon",
+  "surname": "holmurodov",
+  "password": "00"
+}
+
+###
+GET localhost:8080/client/adm/pagination
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgzODc4MzEsImV4cCI6MTY1ODM5MTQzMSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEiLCJyb2xlIjoiUk9MRV9BRE1JTiIsInBhc3N3b3JkIjoiYjRiMTQ3YmM1MjI4Mjg3MzFmMWEwMTZiZmE3MmMwNzMiLCJ1c2VybmFtZSI6ImthcmlteG9uIiwic3RhdHVzIjoiQUNUSVZFIn0.1vuhPq_w8Kqc-Huq8YJNqlAJW0xmWzlr_jYlHfqfbTI
+
+{
+  "status": "ACTIVE"
+}
