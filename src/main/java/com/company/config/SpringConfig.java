@@ -45,18 +45,21 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
         // Authorization
         http.authorizeRequests()
                  .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/auth/public/**").permitAll()
+                .antMatchers("/profile/public/**","/auth/public/**").permitAll()
 
 
 
 
                .antMatchers(  "/company/adm/**").hasRole("ADMIN")
+               .antMatchers(  "/transfer/adm/**").hasRole("ADMIN")
                .antMatchers(  "/profile/adm/**").hasRole("ADMIN")
                .antMatchers(  "/client/bank/**").hasRole("BANK")
                .antMatchers(  "/client/adm/**").hasRole("ADMIN")
-               .antMatchers(  "/card/bank/**").hasRole("BANK")
+               .antMatchers(  "/card/bank/**").hasAnyRole("BANK","UZCARD")
                .antMatchers(  "/card/all/**","/transfer/all/***").hasAnyRole("BANK","PAYMENT")
-               .antMatchers(  "/transfer/user/**").hasAnyRole("USER")
+               .antMatchers(   "/transfer/any/**").hasAnyRole("BANK","PAYMENT","USER","ADMIN")
+               .antMatchers(  "/transfer/all/**").hasAnyRole("BANK")
+               .antMatchers(  "/transaction/bankAndPayment/**").hasAnyRole("BANK","PAYMENT")
 
                 .anyRequest().authenticated()
                 .and().addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

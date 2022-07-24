@@ -1,6 +1,7 @@
 package com.company.repository;
 
 import com.company.entity.CardEntity;
+import com.company.enums.GeneralRole;
 import com.company.enums.GeneralStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,6 +31,34 @@ public interface CardRepository extends JpaRepository<CardEntity, String> {
 
     Optional<CardEntity> findByNumber(String number);
 
+    @Transactional
+    @Modifying
+    @Query(value = "update CardEntity set balance = ?1 where id = ?2")
+    void changeBalance(Long balance, String id);
+    @Query(value = "from CardEntity c where c.company.role = ?1")
+    CardEntity findByCompanyRole(GeneralRole company_role);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update CardEntity set balance = balance - ?2 where id = ?1")
+    void fromCardCredit(String fromCardId, Long totalAmount);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update CardEntity set balance = balance + ?2 where id = ?1")
+    void toCardDebit(String toCardId, Long amount);
+
+    @Query(value = "from CardEntity c where c.companyId = ?1")
+     CardEntity findByCompanyId(String companyId);
 
 
+    @Transactional
+    @Modifying
+    @Query(value = "update CardEntity c set c.balance = c.balance + ?1 where c.id = ?2")
+    void debitCompanyCard(Long companyAmount, String companyId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update CardEntity c set c.balance = c.balance + ?1 where c.id = ?2 ")
+    void debitToUzCard(Long uzCardAmount, String cardId);
 }

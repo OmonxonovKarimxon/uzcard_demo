@@ -21,7 +21,7 @@ public class ProfileController {
     }
 
 
-    @PostMapping("/adm/create")
+    @PostMapping("/public/create")
     public ResponseEntity<?> create(@RequestBody @Valid RegistretionProfileDTO dto){
        String response = profileService.create(dto);
         return ResponseEntity.ok().body(response);

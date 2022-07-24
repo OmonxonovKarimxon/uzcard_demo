@@ -1,14 +1,14 @@
 POST localhost:8080/company/adm/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg0MjMyMDIsImV4cCI6MTY1ODQyNjgwMiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEiLCJyb2xlIjoiUk9MRV9BRE1JTiIsInBhc3N3b3JkIjoiYjRiMTQ3YmM1MjI4Mjg3MzFmMWEwMTZiZmE3MmMwNzMiLCJ1c2VybmFtZSI6ImthcmlteG9uIiwic3RhdHVzIjoiQUNUSVZFIn0.I5vfkerJzgScSlV2qFeFVQ6jvofzfLIosl3A61vg0-c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg1NzcwMjksImV4cCI6MTY1ODU4MDYyOSwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyOGFiN2Q4MjJhZTNlMTAxODIyYWU0MWQ2YjAwMDAiLCJyb2xlIjoiUk9MRV9BRE1JTiIsInBhc3N3b3JkIjoiYjRiMTQ3YmM1MjI4Mjg3MzFmMWEwMTZiZmE3MmMwNzMiLCJ1c2VybmFtZSI6ImthcmlteG9uIiwic3RhdHVzIjoiQUNUSVZFIn0.klRfMgW0IC-fuCa-L4k1T3qshxAyEJi8ggGmCb23Md4
 
 {
-  "name": "UzCard",
+  "name": "AnorBank",
   "address": "chilanzar",
   "contact": "0987654321",
   "role": "ROLE_UZCARD",
   "status": "ACTIVE",
-  "username": "UzCard",
+  "username": "AnorBank",
   "password": "00"
 }
 

@@ -1,13 +1,12 @@
-POST localhost:8080/profile/adm/create
+POST localhost:8080/profile/public/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgyNTczMzgsImV4cCI6MTY1ODI2MDkzOCwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiZmY4MDgwODE4MjE2NjE3MjAxODIxNjYyMGMzOTAwMDEifQ.mN24rEMkP90zJeF31jlapGZqY7TN6gVf8zAMvkTBsgg
 
 {
   "name": "karimxon",
   "surname": "omonxonov",
-  "role": "ROLE_USER",
+  "role": "ROLE_ADMIN",
   "status": "ACTIVE",
-  "username": "uz_card_shoh1",
+  "username": "uz_card_shoh",
   "password": "00"
 }
 

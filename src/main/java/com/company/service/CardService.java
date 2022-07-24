@@ -176,4 +176,7 @@ public class CardService {
         dto.setBalance(entity.getBalance());
         return dto;
     }
+    public  void changeBalance(Long balance, String id ){
+        cardRepository.changeBalance( balance,id);
+    }
 }

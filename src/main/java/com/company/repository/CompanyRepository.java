@@ -22,4 +22,9 @@ public interface CompanyRepository extends PagingAndSortingRepository<CompanyEnt
 
     @Query("from CompanyEntity ")
     Page<CompanyEntity> pagination(Pageable pageable);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update CompanyEntity set balance = ?1 where id = ?2")
+    void changeBalance(Double balance, String id);
 }

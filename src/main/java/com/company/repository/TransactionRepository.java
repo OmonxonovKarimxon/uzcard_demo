@@ -1,19 +1,32 @@
 package com.company.repository;
 
-import com.company.entity.TransferEntity;
-import com.company.enums.GeneralStatus;
-import com.company.enums.TransferStatus;
+import com.company.entity.TransactionsEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
-public interface TransferRepository extends JpaRepository<TransferEntity, String> {
+public interface TransactionRepository extends JpaRepository<TransactionsEntity, String> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "update TransferEntity set status = ?1 where id = ?2")
-    void changeStatus(TransferStatus status, String id);
 
+    Page<TransactionsEntity> findByCardId(String hisobraqam, Pageable pageable);
+
+    @Query("from TransactionsEntity tr where tr.card.clientId=:profileId")
+    Page<TransactionsEntity> byProfileId(String profileId, Pageable pageable);
+
+    @Query("from TransactionsEntity tr where tr.card.phone=:byPhoneNumber")
+    Page<TransactionsEntity> byPhoneNumber(String byPhoneNumber, Pageable pageable);
+
+    @Query("from TransactionsEntity tr where tr.cardId=:cardId and tr.type='DEBIT'")
+    Page<TransactionsEntity> debit(String cardId, Pageable pageable);
+
+    @Query("from TransactionsEntity tr where tr.cardId=:cardId and tr.type='CREDIT'")
+    Page<TransactionsEntity> credit(String cardId, Pageable pageable);
+
+    @Query(value = "from TransactionsEntity tr where tr.cardId=:cardId and tr.createdDate>:time ")
+    Page<TransactionsEntity> month(String cardId, Pageable pageable, LocalDateTime time);
 }

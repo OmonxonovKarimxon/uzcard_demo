@@ -84,5 +84,7 @@ public class CompanyService {
             throw new ItemNotFoundException("company not found");
         });
     }
-
+    public  void changeBalance(Double balance, String id ){
+        companyRepository.changeBalance( balance,id);
+    }
 }

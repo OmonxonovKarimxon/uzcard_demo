@@ -37,7 +37,7 @@ public class CardEntity extends  BaseEntity {
     @Column(name = "client_id")
     private String clientId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false,updatable = false,insertable = false)
+    @JoinColumn(name = "client_id" ,updatable = false,insertable = false)
     private ClientEntity client;
 
     @Column(name = "company_id")

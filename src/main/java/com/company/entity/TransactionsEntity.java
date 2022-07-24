@@ -17,10 +17,9 @@ public class TransactionsEntity extends BaseEntity {
 
     @Column(name = "card_id")
     private String cardId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id", nullable = false, updatable = false, insertable = false)
     private CardEntity card;
-
 
     @Column
     private long amount;
@@ -29,12 +28,10 @@ public class TransactionsEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
-    @Column
-    private Long balance;
 
     @Column(name = "transfer_id")
     private String transferId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transfer_id", nullable = false, updatable = false, insertable = false)
     private TransferEntity transfer;
 

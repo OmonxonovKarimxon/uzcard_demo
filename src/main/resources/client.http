@@ -1,15 +1,15 @@
 POST localhost:8080/client/bank/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgzNzk5NjYsImV4cCI6MTY1ODM4MzU2NiwiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyODgxODM4MjFhNzYzNDAxODIxYTc3M2M3OTAwMDAifQ.bIrwaXKCTtPL81BX0R3yw_ndMPoltlboU_hDI1EcgEI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTg1Nzc1MjMsImV4cCI6MTY1ODU4MTEyMywiaXNzIjoiTWF6Z2kgcHJvZHVjdGlvbiIsImlkIjoiNDAyOGFiN2Q4MjJhZTNlMTAxODIyYWU1YzMzMTAwMDIiLCJyb2xlIjoiUk9MRV9CQU5LIiwicGFzc3dvcmQiOiJiNGIxNDdiYzUyMjgyODczMWYxYTAxNmJmYTcyYzA3MyIsInVzZXJuYW1lIjoiQW5vckJhbmsiLCJzdGF0dXMiOiJBQ1RJVkUifQ.5TBgJNKRhtrL4u7ejSKaxX4iQFDsUzCBOsNnkgsCLbg
 
 {
-  "name": "karimxon",
-  "surname": "omonxonov",
-  "middleName": "Saidkarim",
+  "name": "Omonxonov",
+  "surname": "Saidkarim",
+  "middleName": "suxrov",
   "status": "ACTIVE",
   "passportNumber": "AA",
-  "passportSeria": "12344611",
-  "phone": "123456789"
+  "passportSeria": "12344610",
+  "phone": "4679"
 }
 
 ###

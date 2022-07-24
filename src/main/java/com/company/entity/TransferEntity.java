@@ -18,13 +18,13 @@ public class TransferEntity extends BaseEntity {
 
     @Column(name = "from_card_id")
     private String fromCardId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "from_card_id", nullable = false, updatable = false, insertable = false)
     private CardEntity fromCard;
 
     @Column(name = "to_card_id")
     private String toCardId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_card_id", nullable = false, updatable = false, insertable = false)
     private CardEntity toCard;
 
@@ -48,7 +48,7 @@ public class TransferEntity extends BaseEntity {
 
     @Column(name = "company_Id")
     private String companyId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_Id", nullable = false, updatable = false, insertable = false)
     private CompanyEntity company;
 }

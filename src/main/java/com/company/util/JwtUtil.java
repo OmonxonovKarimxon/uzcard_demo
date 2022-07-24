@@ -14,7 +14,7 @@ public class JwtUtil {
     public static String encode(JwtDTO dto) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date()); // 18:58:00
-        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000))); // 19:58:00
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 60 * 1000))); // 19:58:00
         jwtBuilder.setIssuer("Mazgi production");
         jwtBuilder.signWith(SignatureAlgorithm.HS256, secretKey);
         jwtBuilder.claim("id", dto.getId());
